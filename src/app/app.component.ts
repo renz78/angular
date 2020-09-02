@@ -11,7 +11,7 @@ export interface Section {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'users-list';
+  title = 'Список пользователей';
   //messages: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   messages: Section[] = [
     {
