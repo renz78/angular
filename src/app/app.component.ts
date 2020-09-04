@@ -13,21 +13,5 @@ export interface Section {
 export class AppComponent {
   title = 'Список пользователей';
   //messages: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
-  messages: Section[] = [
-    {
-      from: 'User1',
-      subject: 'subject1',
-      content: 'content1',
-    },
-    {
-      from: 'User2',
-      subject: 'subject2',
-      content: 'content2',
-    },
-    {
-      from: 'User3',
-      subject: 'subject3',
-      content: 'content3',
-    }
-  ];
+  
 }
