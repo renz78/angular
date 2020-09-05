@@ -1,14 +1,14 @@
 <div class="line">
 
-<mat-form-field appearance="outline">
-  <mat-label>Сортировка пользователей</mat-label>
-  <mat-select #list (selectionChange)="sort(list.value)">
-    <mat-option value="0" >От А до Я</mat-option>
-    <mat-option value="1" >От Я до А</mat-option>
-  </mat-select>
-</mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Сортировка пользователей</mat-label>
+    <mat-select #list (selectionChange)="sort(list.value)">
+      <mat-option value="0">От А до Я</mat-option>
+      <mat-option value="1">От Я до А</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<mat-form-field class="" appearance="outline">
+  <mat-form-field class="" appearance="outline">
     <mat-label>Поиск</mat-label>
     <input matInput placeholder="Найти пользователя" value="" (keyup.enter)="search(input.value)" #input>
     <mat-icon matSuffix (click)="search(input.value)">search</mat-icon>
@@ -16,19 +16,56 @@
 
 </div>
 
+<div class="line">
+  <mat-form-field class="item" appearance="outline">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="Username" value="" [(ngModel)]="username">
+    
+  </mat-form-field>
+  <mat-form-field class="item" appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" value="" [(ngModel)]="name">
+    
+  </mat-form-field>
+  <mat-form-field class="item" appearance="outline">
+    <mat-label>User Role</mat-label>
+    <mat-select [(ngModel)]="role">
+      <mat-option value="Admin">Admin</mat-option>
+      <mat-option value="User">User</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="addUser()">Добавить</button>
+</div>
 
-<mat-selection-list #users>
-  <mat-list-option 
-    *ngFor="let user of usersList; let i=index"
-    [ngClass]="{gray: i%2}">
+<div *ngIf="usersList.length>0; else empty">
+  <mat-selection-list #users (selectionChange)="selectItem(users.selectedOptions.selected)">
+    <mat-list-option
+      [value] = "user"
+      *ngFor="let user of usersList; let i=index" 
+      [ngClass]="{gray: i%2}">
+      <div>
+        <span class="item">{{i}} - {{user.username}}</span>
+        <span class="item">{{user.name}}</span>
+        <span *ngIf="user.role === 'Admin'" class="item">{{user.role}}</span>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+  <div class="line">
     <div>
-      <span class="item">{{i}} - {{user.username}}</span>
-      <span class="item">{{user.name}}</span> 
-      <span *ngIf="user.role === 'Admin'" class="item">{{user.role}}</span>
+      Выбрано пользователей: {{users.selectedOptions.selected.length}}
     </div>
-  </mat-list-option>
-</mat-selection-list>
+    <div>
+      <button mat-raised-button color="warn" (click)="deleteUsers()">Удалить</button>
+    </div>
+  </div>
+  
+</div>  
+<ng-template #empty>
+  Пользователей не найдено
+</ng-template>
 
-<p>
-  Options selected: {{users.selectedOptions.selected.length}}
-</p>
+
+
+
+
+

@@ -13,3 +13,7 @@
     justify-content: space-between;
     align-items: flex-start;
 }
+
+.item {
+    width: 170px;
+}
